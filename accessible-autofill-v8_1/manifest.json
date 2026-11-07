@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "Accessible AI Autofill — Voice Assistant v8.2",
+  "version": "0.8.2",
+  "description": "Form overview, batch-approved autofill and conversational voice responses",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "sidePanel",
+    "tabs"
+  ],
+  "optional_host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "host_permissions": [
+    "http://127.0.0.1:3000/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "side_panel": {
+    "default_path": "voice.html"
+  },
+  "action": {
+    "default_title": "Open Accessible Autofill voice assistant"
+  }
+}

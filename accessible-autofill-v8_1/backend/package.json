@@ -1,0 +1,8 @@
+{
+  "name": "accessible-autofill-backend",
+  "private": true,
+  "version": "0.3.0",
+  "type": "module",
+  "scripts": {"start": "node server.mjs"},
+  "dependencies": {"cors":"^2.8.5", "dotenv":"^16.6.1", "express":"^4.21.2"}
+}

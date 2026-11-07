@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Voice-guided Autofill</title>
+<style>
+:root{font-family:system-ui,sans-serif;color-scheme:light}body{margin:0;padding:18px;background:#fff;color:#172033;font-size:17px;line-height:1.5}h1{font-size:1.35rem}button,input,select,textarea{font:inherit;box-sizing:border-box;padding:10px;border:2px solid #64748b;border-radius:8px}button{background:#153b76;color:#fff;cursor:pointer;width:100%;margin:5px 0}button.secondary{background:white;color:#153b76}button:disabled{opacity:.55;cursor:not-allowed}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:4px solid #f59e0b;outline-offset:2px}label{font-weight:650;display:block;margin:10px 0 4px}input,select,textarea{width:100%}#prompt{padding:16px;border:2px solid #bfdbfe;border-radius:10px;background:#f1f5f9;min-height:100px}#status{min-height:35px;font-weight:650}#transcript{background:#f8fafc;padding:8px;min-height:28px;word-break:break-word}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.controls{margin-top:15px}#answers{margin-top:12px}.muted{font-size:.88rem;color:#475569}#review{border-top:2px solid #cbd5e1;margin-top:14px;padding-top:12px}#saveWrap{display:flex;gap:10px;align-items:center}#saveAnswer{width:auto} [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<h1>Voice-guided form assistant</h1>
+<p class="muted">Explains the form, offers one-time approval for ordinary saved answers, then asks only about missing details. Nothing is submitted.</p>
+<label for="profile">Choose a profile</label><select id="profile"></select>
+<button id="manage" class="secondary">Manage saved profiles</button>
+<button id="start">Fill out this form with voice guidance</button>
+<div class="controls">
+  <section id="overview" aria-label="Form overview" hidden><h2>What this form is asking</h2><p id="overviewText"></p><p id="overviewCounts"></p></section>
+  <div id="status" role="status" aria-live="polite">Ready to begin.</div>
+  <div id="prompt" tabindex="-1" aria-label="Current question">Select a profile and start.</div>
+  <p class="muted">Heard: <span id="transcript" aria-live="polite">Nothing yet</span></p>
+  <div id="answers" hidden>
+    <label id="answerLabel" for="answer">Your answer</label>
+    <textarea id="answer" rows="3" autocomplete="off"></textarea>
+    <button id="endDictation" class="secondary" hidden>End long answer</button>
+    <div id="saveWrap"><input type="checkbox" id="saveAnswer"><label for="saveAnswer">Save answer to this profile</label></div>
+    <button id="useAnswer">Use this answer</button>
+  </div>
+  <div class="row"><button id="yes">Yes / Fill known answers</button><button id="no" class="secondary">No / Skip</button></div>
+  <div class="row"><button id="listen">Speak my answer</button><button id="repeat" class="secondary">Repeat question</button></div>
+  <button id="nextPage" class="secondary" hidden>Try next page</button>
+  <button id="submitForm" hidden>Review and submit form</button>
+  <button id="original" class="secondary">Read original question exactly</button>
+  <div class="row"><button id="next" class="secondary">Skip this field</button><button id="stop" class="secondary">Stop</button></div>
+  <section id="review"><h2>Progress</h2><p id="progress">0 of 0 questions reviewed</p></section>
+</div>
+<script src="voice.js"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Accessible AI Autofill</title>
+<style>
+  :root { color-scheme: light; font-family: system-ui, sans-serif; }
+  body { width: 395px; max-height: 570px; overflow-y: auto; margin: 0; padding: 16px; box-sizing: border-box; background: #fff; color: #172033; }
+  h1 { font-size: 1.35rem; margin: 0 0 8px; }
+  h2 { font-size: 1.05rem; margin: 16px 0 8px; }
+  p { line-height: 1.4; }
+  label { display: block; font-weight: 600; margin-top: 10px; }
+  input, select, textarea, button { width: 100%; box-sizing: border-box; font: inherit; padding: 9px; margin-top: 4px; border: 1px solid #697386; border-radius: 6px; }
+  button { cursor: pointer; background: #173a78; color: #fff; border: 0; margin-top: 10px; }
+  button.secondary { background: #eef2f8; color: #172033; border: 1px solid #aeb9ca; }
+  :focus-visible { outline: 3px solid #f59e0b; outline-offset: 2px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .grid button { margin-top: 8px; }
+  .field { padding: 12px; border: 1px solid #d1d8e2; border-radius: 8px; margin: 12px 0; }
+  .source { font-size: .83rem; color: #52617a; }
+  .question { font-weight: 700; margin: 4px 0 8px; }
+  .instructions { font-size: .9rem; color: #4e5b70; }
+  #status { min-height: 1.5em; font-weight: 600; }
+  .rowcheck { display: flex; align-items: flex-start; gap: 8px; margin: 12px 0; font-weight: 400; }
+  .rowcheck input { width: auto; margin-top: 4px; }
+  fieldset { border: 1px solid #d1d8e2; border-radius: 6px; margin: 6px 0; padding: 10px; }
+  legend { font-weight: 600; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<h1>Accessible AI Autofill</h1>
+<p class="instructions">Choose a profile, scan the current form, and approve answers. This extension never submits.</p>
+<label for="profileSelect">Active profile</label>
+<select id="profileSelect"></select>
+<div class="grid"><button id="newProfile" class="secondary">New profile</button><button id="deleteProfile" class="secondary">Delete profile</button></div>
+<section aria-labelledby="editTitle">
+<h2 id="editTitle">Profile details</h2>
+<p class="instructions"><strong>Demo caution:</strong> Use a fictional National Insurance number only. Profiles are stored in Chrome local storage, not suitable for real sensitive identifiers.</p>
+<div id="profileFields"></div>
+<button id="saveProfile">Save this profile</button>
+</section>
+<section aria-labelledby="formTitle">
+<h2 id="formTitle">Current webpage</h2>
+<p class="instructions">Scanning shares form questions (not your profile values) with the hackathon AI proxy for matching. Don't scan private forms without permission.</p>
+<button id="scan">Scan this form</button>
+<div id="suggestions"></div>
+</section>
+<p id="status" role="status" aria-live="polite"></p>
+<script src="popup.js"></script>
+</body>
+</html>

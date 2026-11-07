@@ -1,0 +1,19 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Voice Autofill Test</title></head><body>
+<h1>Accessible form test (do not enter real personal information)</h1>
+<form onsubmit="event.preventDefault()">
+<label for="email">What email can we use to contact you about your project?</label><input id="email" type="email" autocomplete="email">
+<label for="occupation">What is your current job or occupation?</label><input id="occupation" type="text" autocomplete="organization-title">
+<label for="address">What is your current address?</label><input id="address" name="addressLine1" type="text" autocomplete="address-line1">
+<fieldset><legend>How would you like us to contact you?</legend><label><input type="radio" name="contact" value="email">Email</label><label><input type="radio" name="contact" value="telephone">Telephone</label></fieldset>
+<label><input type="checkbox">I agree to be contacted about this test form.</label>
+<label for="region">State or region</label><select id="region"><option value="">Choose</option><option value="CA">California</option><option value="NY">New York</option></select>
+<label for="city">City</label><select id="city"><option value="">Choose a region first</option></select>
+<label for="birth">Date of birth</label><input id="birth" type="date" autocomplete="bday">
+</form>
+<script>
+const places={CA:[['SF','San Francisco'],['LA','Los Angeles']],NY:[['NYC','New York City'],['BUF','Buffalo']]};
+document.getElementById('region').addEventListener('change',()=>{
+const city=document.getElementById('city');city.replaceChildren(new Option('Choose a city',''));
+setTimeout(()=>{for(const [value,label] of places[document.getElementById('region').value]||[])city.add(new Option(label,value))},400);
+});
+</script></body></html>

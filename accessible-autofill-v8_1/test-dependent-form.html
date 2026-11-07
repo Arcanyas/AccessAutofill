@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Autofill dependent dropdown test</title>
+<style>body{font:17px system-ui;max-width:650px;margin:30px auto;padding:12px}label{display:block;margin-top:18px}select,input{font:inherit;display:block;padding:8px;width:100%}p{color:#555}</style></head>
+<body>
+<h1>Local dependent-dropdown test</h1>
+<p>This is a demo only. No form data is submitted.</p>
+<form>
+<label for="street">Current address</label>
+<input id="street" autocomplete="address-line1" placeholder="Current address">
+<label for="state">State / region</label>
+<select id="state" autocomplete="address-level1">
+<option value="">Choose a state</option>
+<option value="CA">California</option>
+<option value="NY">New York</option>
+</select>
+<label for="city">City</label>
+<select id="city" autocomplete="address-level2" disabled>
+<option value="">Select a state first</option>
+</select>
+<fieldset><legend>Date of birth</legend>
+<label for="birth-day">Day</label><select id="birth-day" name="birth-day"><option value="">Choose day</option></select>
+<label for="birth-month">Month</label><select id="birth-month" name="birth-month"><option value="">Choose month</option></select>
+<label for="birth-year">Year</label><select id="birth-year" name="birth-year"><option value="">Choose year</option></select>
+</fieldset>
+</form>
+<script>
+const state = document.getElementById('state');
+const city = document.getElementById('city');
+const cities = { CA:['Los Angeles','San Francisco'], NY:['New York','Buffalo'] };
+state.addEventListener('change', () => {
+ city.disabled = true;
+ city.replaceChildren(new Option('Loading cities…',''));
+ setTimeout(() => {
+  city.replaceChildren(new Option('Choose a city',''));
+  for (const name of cities[state.value] || []) city.add(new Option(name,name));
+  city.disabled = !state.value;
+ }, 650);
+});
+const day = document.getElementById('birth-day');
+for(let d=1;d<=31;d++) day.add(new Option(String(d),String(d)));
+const month = document.getElementById('birth-month');
+const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+months.forEach((m,i)=>month.add(new Option(m,String(i+1))));
+const year = document.getElementById('birth-year');
+for(let y=2026;y>=1920;y--) year.add(new Option(String(y),String(y)));
+</script>
+</body></html>
